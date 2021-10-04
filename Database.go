@@ -5,7 +5,7 @@
  * @LastEditors: Keven
  * @LastEditTime: 2021-09-28 13:12:58
  */
-package main
+package ktools
 
 import (
 	"fmt"

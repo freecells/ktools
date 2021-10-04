@@ -9,7 +9,6 @@ import (
 	"image/png"
 	"io"
 	"io/ioutil"
-	"keven/ktools/tmath"
 	"log"
 	"math"
 	"os"
@@ -17,6 +16,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/freecells/ktools/tmath"
 
 	"github.com/disintegration/imaging"
 	pigo "github.com/esimov/pigo/core"

@@ -3,9 +3,9 @@
  * @version: v1.0.0
  * @Date: 2020-10-16 16:11:02
  * @LastEditors: Keven
- * @LastEditTime: 2021-02-24 09:20:15
+ * @LastEditTime: 2021-10-04 10:54:29
  */
-package main
+package ktools
 
 import (
 	"crypto/rand"

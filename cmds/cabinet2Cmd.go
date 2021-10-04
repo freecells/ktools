@@ -3,7 +3,7 @@
  * @version: v1.0.0
  * @Date: 2020-07-03 13:50:49
  * @LastEditors: Keven
- * @LastEditTime: 2021-09-28 13:28:03
+ * @LastEditTime: 2021-10-04 11:03:26
  */
 
 package cmds
@@ -11,11 +11,12 @@ package cmds
 import (
 	"errors"
 	"fmt"
-	"keven/ktools/datadeal"
-	"keven/ktools/datetime"
-	"keven/ktools/ktcp"
 	"strconv"
 	"time"
+
+	"github.com/freecells/ktools/datadeal"
+	"github.com/freecells/ktools/datetime"
+	"github.com/freecells/ktools/ktcp"
 
 	"github.com/rs/zerolog/log"
 )

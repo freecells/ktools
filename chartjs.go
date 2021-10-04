@@ -1,4 +1,4 @@
-package main
+package ktools
 
 type DataSets struct {
 	Label           string    `json:"label"`

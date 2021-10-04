@@ -1,4 +1,4 @@
-module keven/ktools
+module github.com/freecells/ktools
 
 go 1.14
 
@@ -15,9 +15,9 @@ require (
 	github.com/rs/zerolog v1.25.0
 	github.com/snksoft/crc v1.1.0
 	github.com/tarm/goserial v0.0.0-20151007205400-b3440c3c6355
-	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5
+	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
 	gorm.io/driver/mysql v1.1.2
-	gorm.io/driver/postgres v1.1.1
+	gorm.io/driver/postgres v1.1.2
 	gorm.io/driver/sqlite v1.1.5
 	gorm.io/driver/sqlserver v1.0.9
 	gorm.io/gorm v1.21.15

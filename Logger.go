@@ -3,15 +3,16 @@
  * @version: v1.0.0
  * @Date: 2020-07-03 13:50:49
  * @LastEditors: Keven
- * @LastEditTime: 2021-09-28 13:11:19
+ * @LastEditTime: 2021-10-04 11:04:00
  */
-package main
+package ktools
 
 import (
-	"keven/ktools/tfile"
 	"os"
 	"sort"
 	"time"
+
+	"github.com/freecells/ktools/tfile"
 
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog"

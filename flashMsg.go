@@ -5,7 +5,7 @@
  * @LastEditors: Keven
  * @LastEditTime: 2021-03-13 13:38:48
  */
-package main
+package ktools
 
 /* func FlashMsg(sess sessions.Session) (fm string) {
 
