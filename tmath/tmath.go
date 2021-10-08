@@ -96,6 +96,7 @@ func CosineSimilar(a []float64, b []float64) (cosine float64, err error) {
 	// return sumA / (math.Sqrt(s1 * s2)), nil
 }
 
+//Distance 二维空间两点距离
 func Distance(x1, y1, x2, y2 float64) (dt float64) {
 
 	dt = math.Sqrt(math.Pow((x1-x2), 2) + math.Pow((y1-y2), 2))
@@ -106,6 +107,7 @@ func Distance(x1, y1, x2, y2 float64) (dt float64) {
 	return
 }
 
+//ItoFloat64 整数转换到float64
 func ItoFloat64(some interface{}) (res float64) {
 
 	switch val := some.(type) {

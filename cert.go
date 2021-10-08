@@ -3,7 +3,7 @@
  * @version: v1.0.0
  * @Date: 2020-10-16 16:11:02
  * @LastEditors: Keven
- * @LastEditTime: 2021-10-04 10:54:29
+ * @LastEditTime: 2021-10-08 13:42:21
  */
 package ktools
 
@@ -20,7 +20,7 @@ import (
 )
 
 //GenPem 创建 密钥对
-func GenPem() {
+func GenPem(domainName, ip, email string) {
 
 	privateKey, err := rsa.GenerateKey(rand.Reader, 2048)
 	log.Fatalln(err)
@@ -41,8 +41,8 @@ func GenPem() {
 		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth, x509.ExtKeyUsageClientAuth},
 		BasicConstraintsValid: true,
 	}
-	template.DNSNames = append(template.DNSNames, "localhost", "192.168.1.188")
-	template.EmailAddresses = append(template.EmailAddresses, "test@test.com")
+	template.DNSNames = append(template.DNSNames, domainName, ip)
+	template.EmailAddresses = append(template.EmailAddresses, email)
 
 	certBytes, err := x509.CreateCertificate(rand.Reader, &template, &template, &privateKey.PublicKey, privateKey)
 	log.Fatalln(err)
