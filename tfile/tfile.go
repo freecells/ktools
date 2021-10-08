@@ -3,7 +3,7 @@
  * @version: v1.0.0
  * @Date: 2020-09-14 08:19:46
  * @LastEditors: Keven
- * @LastEditTime: 2021-04-06 08:41:32
+ * @LastEditTime: 2021-10-08 10:38:09
  */
 package tfile
 
@@ -19,8 +19,11 @@ import (
 
 //GetAllFiles 获取指定目录下的所有文件,包含子目录下的文件
 func GetAllFiles(dirPth string) (files []string, err error) {
+
 	var dirs []string
+
 	dir, err := ioutil.ReadDir(dirPth)
+
 	if err != nil {
 		return nil, err
 	}
@@ -92,6 +95,7 @@ func Copy(src, dst string) (int64, error) {
 
 }
 
+//压缩文件夹为 zip文件
 func ZipDir(dir, zipFile string) (err error) {
 
 	fz, err := os.Create(zipFile)
@@ -128,9 +132,11 @@ func ZipDir(dir, zipFile string) (err error) {
 	})
 }
 
+//UnzipDir解压缩zip文件
 func UnzipDir(zipFile, dir string) (err error) {
 
 	r, err := zip.OpenReader(zipFile)
+
 	if err != nil {
 		return
 
@@ -138,25 +144,43 @@ func UnzipDir(zipFile, dir string) (err error) {
 	defer r.Close()
 
 	for _, f := range r.File {
+
 		func() {
 			path := dir + string(filepath.Separator) + f.Name
-			os.MkdirAll(filepath.Dir(path), 0755)
-			fDest, err := os.Create(path)
+
+			err := os.MkdirAll(filepath.Dir(path), 0755)
+
 			if err != nil {
+
+				log.Printf("Create Dir error: %s\n", err.Error())
+
+				return
+			}
+
+			fDest, err := os.Create(path)
+
+			if err != nil {
+
 				log.Printf("Create failed: %s\n", err.Error())
+
 				return
 			}
 			defer fDest.Close()
 
 			fSrc, err := f.Open()
+
 			if err != nil {
+
 				log.Printf("Open failed: %s\n", err.Error())
+
 				return
 			}
 			defer fSrc.Close()
 
 			_, err = io.Copy(fDest, fSrc)
+
 			if err != nil {
+
 				log.Printf("Copy failed: %s\n", err.Error())
 				return
 			}
@@ -178,4 +202,68 @@ func DirSize(path string) (int64, error) {
 		return err
 	})
 	return size, err
+}
+
+/*
+递归获取文件FileInfo 列表
+排序
+	sort.Slice(files, func(i, j int) bool {
+		return files[i].ModTime().Before(files[j].ModTime())
+	})
+*/
+
+type FinfoPath struct {
+	Finfo os.FileInfo
+	Fpath string
+}
+
+func Flist(dirPth string) (files []FinfoPath, err error) {
+
+	var dirs []string
+
+	dir, err := ioutil.ReadDir(dirPth)
+
+	if err != nil {
+		return nil, err
+	}
+
+	PthSep := string(os.PathSeparator)
+	//suffix = strings.ToUpper(suffix) //忽略后缀匹配的大小写
+
+	for _, fi := range dir {
+
+		if fi.IsDir() { // 目录, 递归遍历
+
+			dirs = append(dirs, dirPth+PthSep+fi.Name())
+
+			Flist(dirPth + PthSep + fi.Name())
+
+		} else {
+			// 过滤指定格式
+			// ok := strings.HasSuffix(fi.Name(), ".go")
+			// if ok {}
+			fpath := dirPth + PthSep + fi.Name()
+
+			fip := FinfoPath{
+				Finfo: fi,
+				Fpath: fpath,
+			}
+
+			files = append(files, fip)
+
+		}
+	}
+
+	// 读取子目录下文件
+	for _, subDirs := range dirs {
+
+		subFiles, _ := Flist(subDirs)
+
+		for _, subFile := range subFiles {
+
+			files = append(files, subFile)
+		}
+	}
+
+	return
 }
