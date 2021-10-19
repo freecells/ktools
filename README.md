@@ -3,7 +3,7 @@
  * @version: v1.0.1
  * @Date: 2021-10-04 10:05:45
  * @LastEditors: Keven
- * @LastEditTime: 2021-10-08 13:46:27
+ * @LastEditTime: 2021-10-19 10:52:40
 -->
 # Ktools
 
@@ -16,6 +16,7 @@
 - 网页分页生成
 - http 下载、base64图片保存、压缩和解压缩zip、遍历文件、获取文件夹大小
 - 近似值比较、四舍五入、指定返回小数位数，整数转float64
+  - 随机mac
 - 二维空间 两点角度计算、距离计算、cosine近似值
 - 创建 ssh 证书密钥对
 - validator 错误翻译帮助

@@ -2,7 +2,10 @@ package tmath
 
 import (
 	"errors"
+	"fmt"
 	"math"
+	"math/rand"
+	"time"
 )
 
 //CalcAngle 计算两点之间夹角
@@ -125,6 +128,16 @@ func ItoFloat64(some interface{}) (res float64) {
 		res = 0
 		return
 	}
+
+	return
+}
+
+//random mac
+func RandomMac() (mac string) {
+
+	nrand := rand.New(rand.NewSource(time.Now().UnixNano()))
+
+	mac = fmt.Sprintf("%02x:%02x:%02x:%02x:%02x:%02x", nrand.Intn(255), nrand.Intn(255), nrand.Intn(255), nrand.Intn(255), nrand.Intn(255), nrand.Intn(255))
 
 	return
 }
