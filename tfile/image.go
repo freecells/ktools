@@ -3,7 +3,7 @@
  * @version: v1.0.1
  * @Date: 2021-03-08 15:02:40
  * @LastEditors: Keven
- * @LastEditTime: 2021-09-28 11:26:44
+ * @LastEditTime: 2021-11-02 11:06:59
  */
 package tfile
 
@@ -17,6 +17,8 @@ import (
 	_ "image/png"
 	"io/ioutil"
 	"strings"
+
+	"github.com/google/uuid"
 )
 
 var (
@@ -70,4 +72,22 @@ func AcceptImgType(imgType string) bool {
 	}
 
 	return false
+}
+
+//随机文件名
+func RandomFileName(fileName string) (fname, ftype string, err error) {
+
+	sfs := strings.Split(fileName, ".")
+
+	if len(sfs) >= 2 {
+		ftype = sfs[len(sfs)-1]
+	} else {
+
+		err = errors.New("文件格式不正确")
+		return
+	}
+
+	fname = uuid.New().String() + "." + ftype
+
+	return
 }
